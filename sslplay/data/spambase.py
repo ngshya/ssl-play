@@ -76,7 +76,8 @@ class DataSpambase:
         pass
 
 
-    def split(self, port_test=0.2, port_unla=0.0):
+    def split(self, port_test=0.2, port_unla=0.0, seed=1102):
+        np.random.seed(seed)
         int_size = self.data.shape[0]
         array_sets = np.repeat("L", int_size)
         array_test = np.random.choice([True, False], size=int_size, replace=True, p=[port_test, 1-port_test])
