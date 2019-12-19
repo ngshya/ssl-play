@@ -4,7 +4,7 @@ class modelRF:
 
 
     def __init__(self):
-        self.model = RandomForestClassifier(max_depth=5, random_state=1102)
+        self.model = RandomForestClassifier(max_depth=3, random_state=1102)
 
 
     def fit(self, X, y):
