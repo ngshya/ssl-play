@@ -12,4 +12,4 @@ class modelRF:
 
     
     def predict(self, X):
-        return self.model.predict_proba(X)[:, 1]
+        return self.model.predict_proba(X)
