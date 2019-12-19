@@ -6,7 +6,7 @@ class DataCIFAR:
 
 
     def __init__(self): 
-        pass
+        self.name = "CIFAR"
 
 
     def load(self):

@@ -6,7 +6,7 @@ class DataMNIST:
 
 
     def __init__(self): 
-        pass
+        self.name = "MNIST"
 
 
     def load(self):

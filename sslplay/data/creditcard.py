@@ -5,7 +5,7 @@ class DataCreditCard:
 
 
     def __init__(self): 
-        pass
+        self.name = "CREDIT_CARDS"
 
 
     def load(self, path="data/creditcard/default of credit card clients.csv"):

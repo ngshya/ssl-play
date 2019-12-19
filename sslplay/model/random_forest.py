@@ -1,13 +1,14 @@
 from sklearn.ensemble import RandomForestClassifier
 
-class modelRF:
+class ModelRF:
 
 
     def __init__(self):
         self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=16)
+        self.name = "RF"
 
 
-    def fit(self, X, y):
+    def fit(self, X, y, Xu=None):
         self.model.fit(X, y)
 
     
