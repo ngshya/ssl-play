@@ -1,8 +1,8 @@
 from pandas import read_csv
 import numpy as np
-from sklearn.datasets import load_digits
+import pickle
 
-class DataMNIST:
+class DataCIFAR:
 
 
     def __init__(self): 
@@ -10,10 +10,9 @@ class DataMNIST:
 
 
     def load(self):
-        digits = load_digits()
-        n_samples = len(digits.images)
-        self.data = digits.images.reshape((n_samples, -1))
-        self.target = np.array(digits.target)
+        dict_tmp = pickle.load(open("data/cifar/data_batch_1", 'rb'), encoding='bytes')
+        self.data = dict_tmp[b"data"]
+        self.target = np.array(dict_tmp[b"labels"])
 
     
     def parse(self):
