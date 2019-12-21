@@ -5,7 +5,7 @@ class ModelLabelSpreading:
 
 
     def __init__(self):
-        self.model = LabelSpreading(kernel="knn", n_jobs=12)
+        self.model = LabelSpreading(kernel="knn", n_jobs=6)
         self.name = "LABEL-SPREADING"
 
 

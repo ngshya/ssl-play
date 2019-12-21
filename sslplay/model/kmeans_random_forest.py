@@ -8,7 +8,7 @@ class ModelKMeansRF:
 
 
     def __init__(self):
-        self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=16)
+        self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=6)
 
         self.name = "KMEANS-RF"
 
@@ -24,7 +24,7 @@ class ModelKMeansRF:
             scaler = StandardScaler()
             Xtot_scaled = scaler.fit_transform(Xtot)
 
-            model_kmeans = KMeans(n_clusters=int(Xtot_scaled.shape[0]/30.0), random_state=1102, n_jobs=12)
+            model_kmeans = KMeans(n_clusters=int(Xtot_scaled.shape[0]/30.0), random_state=1102, n_jobs=6)
             model_kmeans.fit(Xtot_scaled)
             labels_kmeans = np.array(model_kmeans.labels_)
 

@@ -11,18 +11,20 @@ import pandas as pd
 
 from sslplay.model.random_forest import ModelRF
 from sslplay.model.label_spreading import ModelLabelSpreading
+from sslplay.model.ladder_network import ModelLadderNetwork
 
 from sslplay.data.spambase import DataSpambase
+from sslplay.data.mnist import DataMNIST
 
 from sslplay.performance.auc import auc
 from sslplay.performance.f1 import f1
 
-obj_data = DataSpambase()
+obj_data = DataMNIST()
 obj_data.load()
 obj_data.parse()
-Xl, yl, Xu, yu, Xt, yt = obj_data.split(percentage_test=20, percentage_unlabelled=50, percentage_labelled=30)
+Xl, yl, Xu, yu, Xt, yt = obj_data.split(percentage_test=20, percentage_unlabelled=10, percentage_labelled=70)
 
-obj_model = ModelLabelSpreading()
+obj_model = ModelLadderNetwork()
 obj_model.fit(Xl, yl, Xu)
 array_test_pred = obj_model.predict(Xt)
 
