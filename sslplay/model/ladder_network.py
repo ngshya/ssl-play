@@ -180,7 +180,7 @@ class ModelLadderNetwork:
         self.model = get_ladder_network_fc(
             layer_sizes = [self.Xl.shape[1], 1000, 500, 250, 250, 250, self.yl.shape[1]]  
         )
-        self.model.fit([ self.Xl , self.Xu   ] , self.yl , epochs=20)
+        self.model.fit([ self.Xl , self.Xu   ] , self.yl , epochs=10)
 
 
     def predict(self, X):

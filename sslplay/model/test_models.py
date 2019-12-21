@@ -5,8 +5,10 @@ from sslplay.data.creditcard import DataCreditCard
 from sslplay.data.mnist import DataMNIST
 from sslplay.data.cifar import DataCIFAR
 from sslplay.model.random_forest import ModelRF
+from sslplay.model.neural_network import ModelNeuralNetwork
 from sslplay.model.kmeans_random_forest import ModelKMeansRF
 from sslplay.model.label_spreading import ModelLabelSpreading
+from sslplay.model.ladder_network import ModelLadderNetwork
 from sslplay.performance.auc import auc
 from sslplay.performance.f1 import f1
 import logging
@@ -15,7 +17,7 @@ def test_models(
     array_datasets=[DataSpambase, DataCreditCard, DataMNIST, DataCIFAR], 
     perc_test = 20,
     array_perc_unla=[0, 79, 79.5, 79.9], 
-    array_models=[ModelRF, ModelKMeansRF, ModelLabelSpreading], 
+    array_models=[ModelRF, ModelNeuralNetwork, ModelKMeansRF, ModelLabelSpreading, ModelLadderNetwork], 
     dict_perf={"AUC": auc, "F1": f1}
 ):
     dtf_performance = pd.DataFrame(
