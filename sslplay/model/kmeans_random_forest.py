@@ -24,19 +24,26 @@ class ModelKMeansRF:
             scaler = StandardScaler()
             Xtot_scaled = scaler.fit_transform(Xtot)
 
-            model_kmeans = KMeans(n_clusters=20, random_state=1102)
+            model_kmeans = KMeans(n_clusters=int(Xtot_scaled.shape[0]/30.0), random_state=1102, n_jobs=12)
             model_kmeans.fit(Xtot_scaled)
             labels_kmeans = np.array(model_kmeans.labels_)
 
             for k in np.unique(sorted(labels_kmeans)):
                 obj_model = ModelRF()
-                array_bool_tmp = array_bool_labelled & (labels_kmeans == k)
-                if sum(array_bool_tmp) > 0:
-                    obj_model.fit(Xtot[array_bool_tmp, :], ytot[array_bool_tmp])
-                    tmp_y_values = sorted(np.unique(ytot[array_bool_tmp]))
-                    array_bool_tmp = (~array_bool_labelled) & (labels_kmeans == k)
-                    if sum(array_bool_tmp) > 0:
-                        ytot[array_bool_tmp] = np.take(tmp_y_values, obj_model.predict(Xtot[array_bool_tmp, :]).argmax(axis=1))
+                array_bool_l_tmp = array_bool_labelled & (labels_kmeans == k)
+                array_bool_u_tmp = (~array_bool_labelled) & (labels_kmeans == k)
+
+                if (sum(array_bool_l_tmp) > 0) and (sum(array_bool_u_tmp) > 0):
+
+                    X_tmp = Xtot[array_bool_l_tmp, :]
+                    y_tmp = ytot[array_bool_l_tmp]
+
+                    if len(np.unique(y_tmp)) == 1:
+                        ytot[array_bool_u_tmp] = y_tmp[0]
+                    else:
+                        obj_model.fit(X_tmp, y_tmp)
+                        tmp_y_values = sorted(np.unique(y_tmp))
+                        ytot[array_bool_u_tmp] = np.take(tmp_y_values, obj_model.predict(Xtot[array_bool_u_tmp, :]).argmax(axis=1))
 
         Xtot = Xtot[ytot >= 0, :]
         ytot = ytot[ytot >=0]
