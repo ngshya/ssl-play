@@ -5,7 +5,7 @@ class ModelRF:
 
     def __init__(self):
         self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=6)
-        self.name = "RF"
+        self.name = "RANDOM-FOREST"
 
 
     def fit(self, X, y, Xu=None):
