@@ -1,10 +1,8 @@
-# Original implementation by: https://github.com/divamgupta/ladder_network_keras
-
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-
+import logging
 
 
 class ModelNeuralNetwork:
@@ -16,6 +14,7 @@ class ModelNeuralNetwork:
 
 
     def fit(self, X, y, Xu=None):
+
         self.Xl = self.scaler.fit_transform(X).reshape(X.shape[0], 1, -1)
 
         self.yl = y
