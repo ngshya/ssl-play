@@ -1,8 +1,11 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sslplay.model.random_forest import ModelRF
+from sslplay.utils.kmean_n_clusters import get_optimal_n_cluster
 import numpy as np
+import logging
 
 class ModelKMeansRF:
 
@@ -21,10 +24,18 @@ class ModelKMeansRF:
 
         if Xu.shape[0] > 0:
 
-            scaler = StandardScaler()
+            scaler = MinMaxScaler()
             Xtot_scaled = scaler.fit_transform(Xtot)
 
-            model_kmeans = KMeans(n_clusters=int(Xtot_scaled.shape[0]/30.0), random_state=1102, n_jobs=6)
+            #int_opt_n_clusters = get_optimal_n_cluster(Xtot_scaled)
+
+            #int_opt_n_clusters = np.min([int_opt_n_clusters, X.shape[0]])
+
+            #logging.debug("Optimal number of clusters: " + str(int_opt_n_clusters))
+
+            #initial_centers = X[np.random.choice(range(X.shape[0]), size=int_opt_n_clusters, replace=False), :]
+
+            model_kmeans = KMeans(n_clusters=int(Xtot.shape[0] / 30.0), random_state=1102, n_jobs=6)
             model_kmeans.fit(Xtot_scaled)
             labels_kmeans = np.array(model_kmeans.labels_)
 
