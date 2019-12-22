@@ -159,14 +159,16 @@ class ModelLadderNetwork:
 
 
     def fit(self, X, y, Xu=None):
+
+        if Xu.shape[0] == 0:
+            Xu = X
+
         self.scaler.fit(np.vstack((X, Xu)))
         self.Xl = self.scaler.transform(X)
         self.yl = keras.utils.to_categorical(y)
         self.Xu = self.scaler.transform(Xu)
 
-        if self.Xu.shape[0] == 0:
-            self.Xu = self.Xl
-        elif self.Xl.shape[0] > self.Xu.shape[0]:
+        if self.Xl.shape[0] > self.Xu.shape[0]:
             int_n_rep = int(self.Xl.shape[0] / self.Xu.shape[0]) + 1
             self.Xu = np.repeat(self.Xu, int_n_rep, axis=0)
             self.Xu = self.Xu[:self.Xl.shape[0],:]
