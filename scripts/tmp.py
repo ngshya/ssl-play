@@ -33,26 +33,17 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
 
-pun = 79.9
+pun = 79
 
-obj_data = DataLandsat()
-obj_data.load()
-obj_data.parse()
-Xl, yl, Xu, yu, Xt, yt = obj_data.split(
-    percentage_test=20, percentage_unlabelled=pun, percentage_labelled=80-pun)
-
-dtf_out = pd.DataFrame(None, columns=["AUC", "ACCURACY", "F1"])
-
-for class_model in [ModelRF, ModelNeuralNetwork]:
-
-    obj_model = class_model()
-    obj_model.fit(Xl, yl, Xu)
-    array_test_pred = obj_model.predict(Xt)
-    array_test_real = yt
-
-    dtf_out.loc[obj_model.name, :] = [auc(array_test_real, array_test_pred), accuracy(array_test_real, array_test_pred), f1(array_test_real, array_test_pred)]
-
-print("")
-print("Dataset: " + obj_data.name)
-print("Percentage unlabelled: " + str(pun))
-print(dtf_out)
+for data_class in [DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataMNIST, DataUSPS, DataCIFAR]:
+    obj_data = data_class()
+    logging.debug("")
+    logging.debug("")
+    logging.debug("DATASET: " + obj_data.name)
+    obj_data.load()
+    obj_data.parse()
+    Xl, yl, Xu, yu, Xt, yt = obj_data.split(
+        percentage_test=20, 
+        percentage_unlabelled=pun, 
+        percentage_labelled=80-pun
+    )
