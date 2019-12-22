@@ -5,8 +5,10 @@ import sys
 import os
 sys.path.append('.')
 
+
 from sslplay.performance.f1 import f1
 from sslplay.performance.auc import auc
+from sslplay.performance.accuracy import accuracy
 
 
 from sslplay.data.spambase import DataSpambase
@@ -31,15 +33,26 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
 
-obj_data = DataUSPS()
+pun = 79.9
+
+obj_data = DataLandsat()
 obj_data.load()
 obj_data.parse()
 Xl, yl, Xu, yu, Xt, yt = obj_data.split(
-    percentage_test=20, percentage_unlabelled=79.9, percentage_labelled=0.1)
+    percentage_test=20, percentage_unlabelled=pun, percentage_labelled=80-pun)
 
-obj_model = ModelLabelSpreading()
-obj_model.fit(Xl, yl, Xu)
-array_test_pred = obj_model.predict(Xt)
+dtf_out = pd.DataFrame(None, columns=["AUC", "ACCURACY", "F1"])
 
-auc(yt, array_test_pred)
-f1(yt, array_test_pred)
+for class_model in [ModelRF, ModelNeuralNetwork]:
+
+    obj_model = class_model()
+    obj_model.fit(Xl, yl, Xu)
+    array_test_pred = obj_model.predict(Xt)
+    array_test_real = yt
+
+    dtf_out.loc[obj_model.name, :] = [auc(array_test_real, array_test_pred), accuracy(array_test_real, array_test_pred), f1(array_test_real, array_test_pred)]
+
+print("")
+print("Dataset: " + obj_data.name)
+print("Percentage unlabelled: " + str(pun))
+print(dtf_out)

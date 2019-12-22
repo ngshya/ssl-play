@@ -11,12 +11,15 @@ class ModelKMeansRF:
 
 
     def __init__(self):
+        np.random.seed(1102)
         self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=6)
 
         self.name = "KMEANS-RF"
 
 
     def fit(self, X, y, Xu):
+
+        np.random.seed(1102)
 
         Xtot = np.vstack((X, Xu))
         array_bool_labelled = np.append(np.repeat(True, X.shape[0]), np.repeat(False, Xu.shape[0]))
@@ -66,5 +69,5 @@ class ModelKMeansRF:
 
     
     def predict(self, X):
-
+        np.random.seed(1102)
         return self.model_rf.predict(X)

@@ -22,12 +22,4 @@ from sslplay.model.label_spreading import ModelLabelSpreading
 from sslplay.model.ladder_network import ModelLadderNetwork
 
 
-dtf_performance = test_models(
-    #array_datasets=[DataSpambase, DataCreditCard, DataMNIST, DataCIFAR], 
-    array_perc_unla=[79.9], 
-    #array_models=[ModelLadderNetwork, ModelRF, ModelNeuralNetwork]
-)
-
-
-#%%
-dtf_performance.to_csv("out.csv", sep=";", index=False)
+dtf_performance = test_models()

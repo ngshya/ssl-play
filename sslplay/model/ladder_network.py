@@ -160,6 +160,8 @@ class ModelLadderNetwork:
 
     def fit(self, X, y, Xu=None):
 
+        tf.set_random_seed(1102)
+
         if Xu.shape[0] == 0:
             Xu = X
 
@@ -180,11 +182,13 @@ class ModelLadderNetwork:
             self.yl = self.yl[:self.Xu.shape[0],:]
 
         self.model = get_ladder_network_fc(
-            layer_sizes = [self.Xl.shape[1], 1000, 500, 250, 250, 250, self.yl.shape[1]]  
+            layer_sizes = [self.Xl.shape[1], 1000, 500, 250, 250, 250, self.yl.shape[1]]
+            #layer_sizes = [self.Xl.shape[1], 2, 2, self.yl.shape[1]]  
         )
         self.model.fit([ self.Xl , self.Xu   ] , self.yl , epochs=10)
 
 
     def predict(self, X):
+        tf.set_random_seed(1102)
         self.Xt = self.scaler.transform(X)
         return self.model.test_model.predict(self.Xt , batch_size=100)

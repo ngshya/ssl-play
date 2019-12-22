@@ -1,22 +1,27 @@
 import numpy as np
 from sklearn.semi_supervised import LabelSpreading
+from sklearn.preprocessing import MinMaxScaler
 
 class ModelLabelSpreading:
 
 
     def __init__(self):
-        self.model = LabelSpreading(kernel="knn", n_jobs=6, alpha=0.2, n_neighbors=10, max_iter=15)
+        np.random.seed(1102)
+        self.model = LabelSpreading(kernel="rbf", n_jobs=6, alpha=0.2, n_neighbors=10, max_iter=15)
         self.name = "LABEL-SPREADING"
+        self.scaler = MinMaxScaler()
 
 
     def fit(self, X, y, Xu=None):
-        self.Xl = X
+        np.random.seed(1102)
+        self.Xl = self.scaler.fit_transform(X)
         self.yl = y
         #self.Xu = Xu
 
 
     def predict(self, X):
-        self.Xt = X
+        np.random.seed(1102)
+        self.Xt = self.scaler.transform(X)
         X = np.vstack((self.Xl, self.Xt))
         y = np.append(self.yl, np.repeat(-1, self.Xt.shape[0]))
         #y = np.append(y, np.repeat(-1, self.Xt.shape[0]))
