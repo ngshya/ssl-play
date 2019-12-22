@@ -36,7 +36,7 @@ def test_models(
 
     dtf_performance = pd.DataFrame(
         data=None, 
-        columns=["MODEL", "DATASET", "PERCENTAGE_UNLABELLED", "METRIC", "VALUE"]
+        columns=["MODEL", "DATASET", "PERC_UNLABELLED", "METRIC", "VALUE"]
     )
     for dataset_class in array_datasets:
         obj_data = dataset_class()
