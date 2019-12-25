@@ -16,7 +16,6 @@ from sslplay.data.creditcard import DataCreditCard
 from sslplay.data.splice import DataSplice
 from sslplay.data.landsat import DataLandsat
 from sslplay.data.letter import DataLetter
-from sslplay.data.mnist import DataMNIST
 from sslplay.data.usps import DataDigits
 from sslplay.data.cifar import DataCIFAR
 
