@@ -2,11 +2,11 @@ from pandas import read_csv
 import numpy as np
 from sslplay.utils.lut_split import lut_split
 
-class DataUSPS:
+class DataDigits:
 
 
     def __init__(self): 
-        self.name = "USPS"
+        self.name = "DIGITS"
 
 
     def load(self, path="data/usps/optdigits.tra"):

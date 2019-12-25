@@ -17,7 +17,7 @@ from sslplay.data.splice import DataSplice
 from sslplay.data.landsat import DataLandsat
 from sslplay.data.letter import DataLetter
 from sslplay.data.mnist import DataMNIST
-from sslplay.data.usps import DataUSPS
+from sslplay.data.usps import DataDigits
 from sslplay.data.cifar import DataCIFAR
 
 
@@ -35,7 +35,7 @@ logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
 pun = 79
 
-for data_class in [DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataMNIST, DataUSPS, DataCIFAR]:
+for data_class in [DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataMNIST, DataDigits, DataCIFAR]:
     obj_data = data_class()
     logging.debug("")
     logging.debug("")

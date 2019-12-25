@@ -12,7 +12,7 @@ from sslplay.data.splice import DataSplice
 from sslplay.data.landsat import DataLandsat
 from sslplay.data.letter import DataLetter
 from sslplay.data.mnist import DataMNIST
-from sslplay.data.usps import DataUSPS
+from sslplay.data.usps import DataDigits
 from sslplay.data.cifar import DataCIFAR
 
 from sslplay.model.random_forest import ModelRF
@@ -25,7 +25,7 @@ import logging
 
 def test_models(
     file_out="out.csv",
-    array_datasets=[DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataMNIST, DataUSPS, DataCIFAR], 
+    array_datasets=[DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataMNIST, DataDigits, DataCIFAR], 
     perc_test = 20,
     array_perc_unla=[79.9], 
     array_models=[ModelRF, ModelNeuralNetwork, ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading], 
