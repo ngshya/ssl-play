@@ -26,7 +26,7 @@ def test_models(
     file_out="out.csv",
     array_datasets=[DataSpambase, DataCreditCard, DataSplice, DataLandsat, DataLetter, DataDigits, DataCIFAR], 
     perc_test = 20,
-    array_perc_unla=[79.9], 
+    array_perc_unla=[79.9, 79.0, 75.0, 70.0, 60.0, 50.0, 40.0, 30.0, 20.0, 10.0], 
     array_models=[ModelRF, ModelNeuralNetwork, ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading], 
     dict_perf={"ACCURACY": accuracy, "AUC_MACRO": auc, "AUC_WEIGHTED": aucW, "F1_MACRO": f1, "F1_WEIGHTED": f1W}
 ):
