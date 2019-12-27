@@ -13,7 +13,7 @@ class TestSample(unittest.TestCase):
         PING = "PONG"
         self.assertEqual(PING, "PONG")
 
-
+###############################################################################
 
 import numpy as np
 from sslplay.utils.ssplit import ssplit
@@ -81,9 +81,60 @@ class TestUtils(unittest.TestCase):
         self.assertTrue(sum(y1==y4) == len(y1))
         self.assertTrue((len(y2) != len(y5)) or (sum(y2==y5) < len(y2)))
 
+###############################################################################
 
+from sslplay.data.spambase import DataSpambase
+from sslplay.data.creditcard import DataCreditCard
+from sslplay.data.splice import DataSplice
+from sslplay.data.landsat import DataLandsat
+from sslplay.data.digits import DataDigits
+from sslplay.data.letter import DataLetter
+from sslplay.data.cifar import DataCIFAR
 
+class TestData(unittest.TestCase):
 
+    def test_spambase(self):
+        obj_data = DataSpambase()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 4601)
+
+    def test_creditcard(self):
+        obj_data = DataCreditCard()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 30000)
+
+    def test_splice(self):
+        obj_data = DataSplice()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 3190)
+
+    def test_landsat(self):
+        obj_data = DataLandsat()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 6435)
+
+    def test_digits(self):
+        obj_data = DataDigits()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 5620)
+
+    def test_letter(self):
+        obj_data = DataLetter()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 20000)
+
+    def test_cifar(self):
+        obj_data = DataCIFAR()
+        obj_data.load()
+        self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
+        self.assertEqual(obj_data.X.shape[0], 10000)
+###############################################################################
 
 if __name__ == '__main__':
     unittest.main()

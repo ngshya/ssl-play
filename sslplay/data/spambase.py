@@ -10,8 +10,8 @@ class DataSpambase:
 
 
     def load(self, path="data/spambase/spambase.data"):
-        self.data = read_csv(path, header=None)
-        self.data.columns = [
+        self.X = read_csv(path, header=None)
+        self.X.columns = [
             "word_freq_make", 
             "word_freq_address", 
             "word_freq_all", 
@@ -71,17 +71,9 @@ class DataSpambase:
             "capital_run_length_total", 
             "target"
         ]
+        self.y = np.array(self.X["target"])
+        self.X = self.X.loc[:, self.X.columns != "target"]
 
     
     def parse(self):
         pass
-
-
-    def split(self, percentage_test=20, percentage_unlabelled=70, percentage_labelled=10, seed=1102):
-        return lut_split(
-            X=self.data.loc[:, self.data.columns != "target"], 
-            y=np.array(self.data["target"]), 
-            percentage_test=percentage_test, 
-            percentage_unlabelled=percentage_unlabelled, 
-            percentage_labelled=percentage_labelled
-        )

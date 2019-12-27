@@ -1,6 +1,6 @@
-from pandas import read_csv
+from pandas import read_csv, concat
 import numpy as np
-from sslplay.utils.lut_split import lut_split
+import glob
 
 class DataDigits:
 
@@ -9,21 +9,15 @@ class DataDigits:
         self.name = "DIGITS"
 
 
-    def load(self, path="data/usps/optdigits.tra"):
-        self.data = read_csv(path, header=None, sep=",")
-        self.target = np.array(self.data.iloc[:, 64].astype("category").cat.codes.values)
-        self.data = self.data.iloc[:, 0:64]
+    def load(self, path="data/digits/optdigits.*"):
+        self.lst_all_files = glob.glob(path)
+        self.X = (read_csv(f, header=None, sep=",") \
+        for f in self.lst_all_files)
+        self.X = concat(self.X, ignore_index=True)
+        self.y = np.array(self.X.iloc[:, 64]\
+        .astype("category").cat.codes.values)
+        self.X = self.X.iloc[:, 0:64]
         
     
     def parse(self):
         pass
-
-
-    def split(self, percentage_test=20, percentage_unlabelled=70, percentage_labelled=10, seed=1102):
-        return lut_split(
-            X=self.data, 
-            y=self.target, 
-            percentage_test=percentage_test, 
-            percentage_unlabelled=percentage_unlabelled, 
-            percentage_labelled=percentage_labelled
-        )
