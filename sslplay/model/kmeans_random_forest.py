@@ -15,7 +15,7 @@ class ModelKMeansRF:
         np.random.seed(1102)
         self.model = RandomForestClassifier(
             max_depth=5, random_state=1102, 
-            n_jobs=np.max([multiprocessing.cpu_count()-2, 1])
+            n_jobs=int(np.max([multiprocessing.cpu_count()-2, 1]))
         )
 
         self.name = "KMEANS-RF"
