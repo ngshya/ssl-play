@@ -160,7 +160,7 @@ class ModelLadderNetwork:
 
     def fit(self, X, y, Xu=None):
 
-        tf.set_random_seed(1102)
+        tf.compat.v1.set_random_seed(1102)
 
         if Xu.shape[0] == 0:
             Xu = X
@@ -189,6 +189,6 @@ class ModelLadderNetwork:
 
 
     def predict(self, X):
-        tf.set_random_seed(1102)
+        tf.compat.v1.set_random_seed(1102)
         self.Xt = self.scaler.transform(X)
         return self.model.test_model.predict(self.Xt , batch_size=100)

@@ -4,7 +4,6 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import logging
 
-
 class ModelNeuralNetwork:
 
 
@@ -15,7 +14,7 @@ class ModelNeuralNetwork:
 
     def fit(self, X, y, Xu=None):
 
-        tf.set_random_seed(1102)
+        tf.compat.v1.set_random_seed(1102)
 
         self.Xl = self.scaler.fit_transform(X).reshape(X.shape[0], 1, -1)
 
@@ -37,10 +36,10 @@ class ModelNeuralNetwork:
             metrics=['accuracy']
         )
 
-        self.model.fit(self.Xl, self.yl, epochs=10)
+        self.model.fit(self.Xl, self.yl, epochs=10, verbose=0)
 
 
     def predict(self, X):
-        tf.set_random_seed(1102)
+        tf.compat.v1.set_random_seed(1102)
         self.Xt = self.scaler.transform(X).reshape(X.shape[0], 1, -1)
         return self.model.predict(self.Xt)
