@@ -1,0 +1,4 @@
+#|/bin/bash
+
+pipreqs --force sslplay --use-local --savepath requirements.txt
+echo scikit-learn==0.22 >> requirements.txt
