@@ -2,7 +2,7 @@ import numpy as np
 import random
 import logging
 
-def ssplit(X, y, percentage_1, percentage_2, seed=1102):
+def ssplit(X, y, percentage_1, percentage_2, min_el_1=1, min_el_2=1, seed=1102):
 
     assert percentage_1 >= 0
     assert percentage_2 >= 0
@@ -28,7 +28,7 @@ def ssplit(X, y, percentage_1, percentage_2, seed=1102):
     assert X.shape[0] == int_n
     
     tmp_y_counts = np.unique(y, return_counts=True)
-    assert np.min(tmp_y_counts[1]) >= 2
+    assert np.min(tmp_y_counts[1]) >= min_el_1 + min_el_2
 
     array_classes = sorted(tmp_y_counts[0])
     int_n_classes = len(array_classes)
@@ -45,9 +45,11 @@ def ssplit(X, y, percentage_1, percentage_2, seed=1102):
             p=[percentage_1, percentage_2], 
             replace=True
         )
-        if len(np.unique(array_sets_c)) < 2:
-            array_sets_c[random.sample(range(len(array_sets_c)), 2)] \
-            = np.array([1,2])
+        if (sum(array_sets_c == 1) < min_el_1) \
+        or (sum(array_sets_c == 2) < min_el_2):
+            array_sets_c[random.sample(range(len(array_sets_c)), \
+            min_el_1 + min_el_2)] \
+            = np.append([1] * min_el_1, [2]*min_el_2)
             logging.debug("The class " + str(c)\
             + " did not have all sets. Issue solved by adding them!")
         array_sets[array_bool_c] = array_sets_c

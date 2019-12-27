@@ -40,6 +40,13 @@ class TestUtils(unittest.TestCase):
         self.assertTrue(len(np.unique(y1)) == len(np.unique(y2)))
         self.assertTrue(np.abs(len(y2) / len(y) - 0.01) < 0.01)
 
+        X1, y1, X2, y2 = ssplit(X=X, y=y, percentage_1=100, percentage_2=0, seed=1102)
+        self.assertTrue(len(np.unique(y1)) == len(np.unique(y)))
+
+        X1, y1, X2, y2 = ssplit(X=X, y=y, percentage_1=99.9, percentage_2=0.1, min_el_1=1, min_el_2=10, seed=1102)
+        self.assertTrue(sum(y2 == 0) >= 10 )
+
+
 
 
 
