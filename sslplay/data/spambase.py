@@ -1,6 +1,5 @@
 from pandas import read_csv
 import numpy as np
-from sslplay.utils.lut_split import lut_split
 
 class DataSpambase:
 
