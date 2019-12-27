@@ -4,14 +4,21 @@ import logging
 
 def ssplit(X, y, percentage_1, percentage_2, seed=1102):
 
-    assert percentage_1 > 0
-    assert percentage_2 > 0
+    assert percentage_1 >= 0
+    assert percentage_2 >= 0
+    assert percentage_1 + percentage_2 > 0
 
     np.random.seed(seed)
     random.seed(seed)
 
     y = np.array(y)
     X = np.array(X)
+
+    if percentage_1 == 0:
+        return None, None, X, y
+    
+    if percentage_2 == 0:
+        return X, y, None, None
 
     tmp_percentage_sum = percentage_1 + percentage_2 + 0.0
     percentage_1 = percentage_1 / tmp_percentage_sum
