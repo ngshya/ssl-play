@@ -7,7 +7,6 @@ def s3split(
     X, y, 
     percentage_1, percentage_2, percentage_3, 
     seed_1=1102, seed_2=1102, 
-    verbose=False, 
 ):
 
     assert percentage_1 >= 0
@@ -51,9 +50,8 @@ def s3split(
         seed=seed_2
     )
 
-    if verbose:
-        logging.debug("Set 1 expected percentage: " + str(round(percentage_1, 4)) + " | real percentage: " + str(round(len(y1) / int_n * 100, 4)))
-        logging.debug("Set 2 expected percentage: " + str(round(percentage_2, 4)) + " | real percentage: " + str(round(len(y2) / int_n * 100, 4)))
-        logging.debug("Set 3 expected percentage: " + str(round(percentage_3, 4)) + " | real percentage: " + str(round(len(y3) / int_n * 100, 4)))
+    logging.debug("Set 1 expected percentage: " + str(round(percentage_1, 4)) + " | real percentage: " + str(round(len(y1) / int_n * 100, 4)))
+    logging.debug("Set 2 expected percentage: " + str(round(percentage_2, 4)) + " | real percentage: " + str(round(len(y2) / int_n * 100, 4)))
+    logging.debug("Set 3 expected percentage: " + str(round(percentage_3, 4)) + " | real percentage: " + str(round(len(y3) / int_n * 100, 4)))
 
     return X1, y1, X2, y2, X3, y3
