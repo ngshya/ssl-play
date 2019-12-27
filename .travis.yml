@@ -5,12 +5,17 @@ python:
   - "3.6"
 
 install:
+  - pip install pytest
+  - pip install pytest-cov
+  - pip install coveralls 
   - pip install -r requirements.txt
   - pip install .
 # command to run tests
 script:
   - python -m unittest discover tests
-
+  - coverage run --source sslplay test/test.py
 branches:
   only:
   - master
+after_success:
+  - coveralls
