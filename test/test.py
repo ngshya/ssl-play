@@ -134,7 +134,84 @@ class TestData(unittest.TestCase):
         obj_data.load()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 10000)
+
 ###############################################################################
+
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+import tensorflow as tf 
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+from tensorflow.python.util import deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
+
+from sslplay.utils.s3split import s3split
+from sslplay.data.creditcard import DataCreditCard
+from sslplay.model.data_model_run import data_model_run
+from sslplay.model.random_forest import ModelRF
+from sslplay.model.neural_network import ModelNeuralNetwork
+from sslplay.model.kmeans_random_forest import ModelKMeansRF
+from sslplay.model.ladder_network import ModelLadderNetwork
+from sslplay.model.label_spreading import ModelLabelSpreading
+
+obj_data = DataCreditCard()
+obj_data.load()
+obj_data.X = obj_data.X.loc[0:100, :]
+obj_data.y = obj_data.y[0:101]
+Xt, yt, Xu, yu, Xl, yl = s3split(
+    X=obj_data.X, 
+    y=obj_data.y, 
+    percentage_1=20, 
+    percentage_2=40, 
+    percentage_3=40,
+    seed_1=1102, 
+    seed_2=1102
+)
+
+class TestModel(unittest.TestCase):
+
+    def test_rf(self):
+        obj_model = ModelRF()
+        obj_model.fit(Xl, yl, Xu)
+        array_test_pred = obj_model.predict(Xt)
+        self.assertEqual(len(array_test_pred), len(yt))
+
+    def test_nn(self):
+        obj_model = ModelNeuralNetwork()
+        obj_model.fit(Xl, yl, Xu)
+        array_test_pred = obj_model.predict(Xt)
+        self.assertEqual(len(array_test_pred), len(yt))
+
+    def test_krf(self):
+        obj_model = ModelKMeansRF()
+        obj_model.fit(Xl, yl, Xu)
+        array_test_pred = obj_model.predict(Xt)
+        self.assertEqual(len(array_test_pred), len(yt))
+
+    def test_ln(self):
+        obj_model = ModelLadderNetwork()
+        obj_model.fit(Xl, yl, Xu)
+        array_test_pred = obj_model.predict(Xt)
+        self.assertEqual(len(array_test_pred), len(yt))
+
+    def test_ls(self):
+        obj_model = ModelLabelSpreading()
+        obj_model.fit(Xl, yl, Xu)
+        array_test_pred = obj_model.predict(Xt)
+        self.assertEqual(len(array_test_pred), len(yt))
+
+    def test_data_model_run(self):
+        dtf_performance = data_model_run(
+            class_data=DataCreditCard,
+            class_model=ModelRF, 
+            percentage_test=20,
+            percentage_unlabeled=75, 
+            percentage_labeled=5, 
+            cv_folds=2, 
+            random_samples=2,
+            seed=1102
+        )
+        self.assertTrue(dtf_performance.shape[0] > 1)
+
 
 if __name__ == '__main__':
     unittest.main()
