@@ -1,12 +1,17 @@
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+import multiprocessing
 
 class ModelRF:
 
 
     def __init__(self):
         np.random.seed(1102)
-        self.model = RandomForestClassifier(max_depth=5, random_state=1102, n_jobs=6)
+        self.model = RandomForestClassifier(
+            max_depth=5, 
+            random_state=1102, 
+            n_jobs=np.max([multiprocessing.cpu_count()-2, 1])
+        )
         self.name = "RANDOM-FOREST"
 
 

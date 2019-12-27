@@ -1,13 +1,18 @@
 import numpy as np
 from sklearn.semi_supervised import LabelSpreading
 from sklearn.preprocessing import MinMaxScaler
+import multiprocessing
 
 class ModelLabelSpreading:
 
 
     def __init__(self):
         np.random.seed(1102)
-        self.model = LabelSpreading(kernel="rbf", n_jobs=6, alpha=0.2, n_neighbors=10, max_iter=15)
+        self.model = LabelSpreading(
+            kernel="rbf", 
+            n_jobs=np.max([multiprocessing.cpu_count()-2, 1]), 
+            alpha=0.2, n_neighbors=10, max_iter=15
+        )
         self.name = "LABEL-SPREADING"
         self.scaler = MinMaxScaler()
 
