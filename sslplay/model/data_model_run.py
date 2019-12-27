@@ -26,7 +26,8 @@ def data_model_run(
     },
     cv_folds=5, 
     random_samples=10, 
-    seed=1102
+    seed=1102, 
+    verbose=True
 ):
 
     tf.compat.v1.set_random_seed(seed)
@@ -49,15 +50,16 @@ def data_model_run(
 
             obj_model = class_model()
 
-            logging.info(
-                "MODEL " + obj_model.name + " " 
-                + "DATA " + obj_data.name + " " 
-                + "T" + str(percentage_test) + " " 
-                + "U" + str(percentage_unlabeled) + " "
-                + "L" + str(percentage_labeled) + " "
-                + "FOLD " + str(fold+1) + " "
-                + "SAMPLE " + str(n_sample+1) + " "
-            )
+            if verbose:
+                logging.info(
+                    "MODEL " + obj_model.name + " " 
+                    + "DATA " + obj_data.name + " " 
+                    + "T" + str(percentage_test) + " " 
+                    + "U" + str(percentage_unlabeled) + " "
+                    + "L" + str(percentage_labeled) + " "
+                    + "FOLD " + str(fold+1) + " "
+                    + "SAMPLE " + str(n_sample+1) + " "
+                )
 
             Xt, yt, Xu, yu, Xl, yl = s3split(
                 X=obj_data.X, 
@@ -96,7 +98,7 @@ def data_model_run(
 
     dtf_performance = dtf_performance.loc[:, ["MODEL", "DATASET", "PERC_T", "PERC_U", "PERC_L", "CV", "SAMPLES", "METRIC", "VALUE_MEAN", "VALUE_STD"]]
 
-
-    logging.info('\t\n'+ dtf_performance.to_string().replace('\n', '\n\t'))
+    if verbose: 
+        logging.info('\t\n'+ dtf_performance.to_string().replace('\n', '\n\t'))
 
     return dtf_performance

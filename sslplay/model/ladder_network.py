@@ -185,7 +185,7 @@ class ModelLadderNetwork:
             layer_sizes = [self.Xl.shape[1], 1000, 500, 250, 250, 250, self.yl.shape[1]]
             #layer_sizes = [self.Xl.shape[1], 2, 2, self.yl.shape[1]]  
         )
-        self.model.fit([ self.Xl , self.Xu   ] , self.yl , epochs=10)
+        self.model.fit([ self.Xl , self.Xu   ] , self.yl , epochs=10, verbose=0)
 
 
     def predict(self, X):
