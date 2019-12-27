@@ -47,7 +47,7 @@ def ssplit(X, y, percentage_1, percentage_2, seed=1102):
         )
         if len(np.unique(array_sets_c)) < 2:
             array_sets_c[random.sample(range(len(array_sets_c)), 2)] \
-            = np.array([1,2])[2]
+            = np.array([1,2])
             logging.debug("The class " + str(c)\
             + " did not have all sets. Issue solved by adding them!")
         array_sets[array_bool_c] = array_sets_c
