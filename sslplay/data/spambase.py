@@ -5,7 +5,7 @@ class DataSpambase:
 
 
     def __init__(self): 
-        self.name = "SPAM"
+        self.name = "SPAMBASE"
 
 
     def load(self, path="data/spambase/spambase.data"):
