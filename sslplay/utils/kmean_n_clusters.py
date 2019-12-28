@@ -1,3 +1,4 @@
+'''
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
@@ -33,3 +34,4 @@ def optimal_number_of_clusters(wcss):
 
 def get_optimal_n_cluster(data):
     return optimal_number_of_clusters(calculate_wcss(data))
+'''

@@ -3,7 +3,6 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from sslplay.model.random_forest import ModelRF
-from sslplay.utils.kmean_n_clusters import get_optimal_n_cluster
 import numpy as np
 import logging
 import multiprocessing
