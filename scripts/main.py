@@ -52,8 +52,8 @@ for percentage_unlabeled in \
             percentage_test=20,
             percentage_unlabeled=percentage_unlabeled, 
             percentage_labeled=80-percentage_unlabeled, 
-            cv_folds=1, 
-            random_samples=1,
+            cv_folds=2, 
+            random_samples=2,
             seed=1102
         )
         if dtf_performance is None:
@@ -86,9 +86,9 @@ DataLetter, DataDigits, DataCIFAR]:
             class_model=class_model, 
             percentage_test=20,
             percentage_unlabeled=0.1, 
-            percentage_labeled=79.9, 
-            cv_folds=1, 
-            random_samples=1,
+            percentage_labeled=79.9,
+            cv_folds=2, 
+            random_samples=2,
             seed=1102
         )
         if dtf_performance is None:
@@ -122,8 +122,8 @@ DataLetter, DataDigits, DataCIFAR]:
             percentage_test=20,
             percentage_unlabeled=5, 
             percentage_labeled=75, 
-            cv_folds=1, 
-            random_samples=1,
+            cv_folds=2, 
+            random_samples=2,
             seed=1102
         )
         if dtf_performance is None:
