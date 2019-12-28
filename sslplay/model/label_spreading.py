@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.semi_supervised import LabelSpreading
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 import multiprocessing
 
 class ModelLabelSpreading:
@@ -19,15 +20,15 @@ class ModelLabelSpreading:
 
     def fit(self, X, y, Xu=None):
         np.random.seed(1102)
-        self.Xl = self.scaler.fit_transform(X)
+        self.Xl = X
         self.yl = y
         #self.Xu = Xu
 
 
     def predict(self, X):
         np.random.seed(1102)
-        self.Xt = self.scaler.transform(X)
-        X = np.vstack((self.Xl, self.Xt))
+        self.Xt = X
+        X = self.scaler.fit_transform(np.vstack((self.Xl, self.Xt)))
         y = np.append(self.yl, np.repeat(-1, self.Xt.shape[0]))
         #y = np.append(y, np.repeat(-1, self.Xt.shape[0]))
         y = np.int64(y)

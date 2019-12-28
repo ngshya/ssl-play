@@ -73,6 +73,7 @@ class DataSpambase:
         self.y = np.array(self.X["target"])
         self.X = self.X.loc[:, self.X.columns != "target"]
 
+
     
     def parse(self):
         pass
