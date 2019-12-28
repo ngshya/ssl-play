@@ -1,0 +1,5 @@
+#|/bin/bash
+
+python -m unittest discover test
+coverage run --source sslplay test/test.py
+coverage report -m
