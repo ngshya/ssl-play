@@ -85,8 +85,8 @@ DataLetter, DataDigits, DataCIFAR]:
             class_data=class_data,
             class_model=class_model, 
             percentage_test=20,
-            percentage_unlabeled=5, 
-            percentage_labeled=75, 
+            percentage_unlabeled=0.1, 
+            percentage_labeled=79.9, 
             cv_folds=5, 
             random_samples=10,
             seed=1102
@@ -120,8 +120,8 @@ DataLetter, DataDigits, DataCIFAR]:
             class_data=class_data,
             class_model=class_model, 
             percentage_test=20,
-            percentage_unlabeled=0.1, 
-            percentage_labeled=79.9, 
+            percentage_unlabeled=5, 
+            percentage_labeled=75, 
             cv_folds=5, 
             random_samples=10,
             seed=1102
