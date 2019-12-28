@@ -48,6 +48,9 @@ class TestUtils(unittest.TestCase):
         X1, y1, X2, y2 = ssplit(X=X, y=y, 
             percentage_1=100, percentage_2=0, seed=1102)
         self.assertTrue(len(np.unique(y1)) == len(np.unique(y)))
+        X1, y1, X2, y2 = ssplit(X=X, y=y, 
+            percentage_1=0, percentage_2=100, seed=1102)
+        self.assertTrue(len(np.unique(y2)) == len(np.unique(y)))
 
         X1, y1, X2, y2 = ssplit(X=X, y=y, 
             percentage_1=99.9, percentage_2=0.1, 
@@ -96,42 +99,49 @@ class TestData(unittest.TestCase):
     def test_spambase(self):
         obj_data = DataSpambase()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 4601)
 
     def test_creditcard(self):
         obj_data = DataCreditCard()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 30000)
 
     def test_splice(self):
         obj_data = DataSplice()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 3190)
 
     def test_landsat(self):
         obj_data = DataLandsat()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 6435)
 
     def test_digits(self):
         obj_data = DataDigits()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 5620)
 
     def test_letter(self):
         obj_data = DataLetter()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 20000)
 
     def test_cifar(self):
         obj_data = DataCIFAR()
         obj_data.load()
+        obj_data.parse()
         self.assertEqual(obj_data.X.shape[0], len(obj_data.y))
         self.assertEqual(obj_data.X.shape[0], 10000)
 
