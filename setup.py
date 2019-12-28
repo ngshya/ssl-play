@@ -11,8 +11,8 @@ setup(
     packages=['sslplay', 'sslplay.data', 'sslplay.model', 'sslplay.performance', 'sslplay.utils'],
     install_requires=required,
     version='1.1.1',
-    license='proprietary',
-    description='',
+    license=open("LICENSE").read(),
+    description='Experiments with semi-supervised learning methods.',
     long_description=open('README.md').read(),
     package_data={
         'sslplay': ["*"],
