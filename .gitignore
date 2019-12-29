@@ -128,3 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# batch run results
+outputs/batch_run_output/*
