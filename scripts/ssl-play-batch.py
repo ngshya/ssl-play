@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
                 if os.path.isfile(file_name): 
                     print(str(file_name) + " already exists!")
-                    exit()
+                    continue
                 
                 time.sleep(np.random.randint(0, 10))
 
