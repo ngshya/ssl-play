@@ -50,8 +50,8 @@ if __name__ == "__main__":
                     "--data=" + data + " " +
                     "--model=" + model + " " +
                     "--ptest=" + str(20) + " " + 
-                    "--punla=" + str(punla) + " " + 
-                    "--plabe=" + str(80-punla) + " " + 
+                    "--punla=" + str(round(punla, 2)) + " " + 
+                    "--plabe=" + str(round(80-punla, 2)) + " " + 
                     "--folds=" + str(5) + " " + 
                     "--samples=" + str(30) + " " +
                     "--outfolder=" + "outputs/batch_run_output/" + " " +
