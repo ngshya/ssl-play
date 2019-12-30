@@ -45,8 +45,6 @@ if __name__ == "__main__":
                 time.sleep(np.random.randint(0, 10))
 
                 while True:
-
-                    time.sleep(30)
                     
                     cpu_available = 100 - float(subprocess.check_output("top -bn2 | grep 'Cpu(s)' | awk END'{print $2}'", shell=True).decode('ascii').replace("\n", "").replace(",", "."))
                     ram_available = float(subprocess.check_output("free | grep Mem | awk '{print $7/$2 * 100.0}'", shell=True).decode('ascii').replace("\n", ""))
@@ -66,6 +64,8 @@ if __name__ == "__main__":
                                 break
                         else:
                             break
+
+                    time.sleep(np.random.randint(20, 30))
 
 
                 os.system(
