@@ -42,7 +42,7 @@ from sslplay.model.label_spreading import ModelLabelSpreading
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for percentage_unlabeled in \
-[40, 45, 50, 55, 60, 65, 70, 75, 79, 79.5, 79.9]:
+[40, 45, 50, 55, 60, 65, 70, 75]:
     for class_model in \
     [ModelRF, ModelNeuralNetwork, \
     ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading]:
@@ -75,9 +75,9 @@ for percentage_unlabeled in \
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for class_data in \
-[DataSpambase, DataCreditCard, \
+[DataDigits, DataSpambase, DataCreditCard, \
 DataSplice, DataLandsat, \
-DataLetter, DataDigits, DataCIFAR]:
+DataLetter, DataCIFAR]:
     for class_model in \
     [ModelRF, ModelNeuralNetwork, \
     ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading]:
@@ -85,8 +85,8 @@ DataLetter, DataDigits, DataCIFAR]:
             class_data=class_data,
             class_model=class_model, 
             percentage_test=20,
-            percentage_unlabeled=0.1, 
-            percentage_labeled=79.9,
+            percentage_unlabeled=5, 
+            percentage_labeled=75,
             cv_folds=2, 
             random_samples=2,
             seed=1102
@@ -98,41 +98,6 @@ DataLetter, DataDigits, DataCIFAR]:
             .reset_index(drop=True)
         dtf_performance.to_csv(
             path_or_buf="outputs/" + str_run_id + "-experiment-2.csv", 
-            sep=";", 
-            index=False,
-            decimal="."
-        )
-
-
-
-# Experiment 3
-
-dtf_performance = None
-str_run_id = time.strftime("%Y-%m-%d-%H-%M")
-for class_data in \
-[DataSpambase, DataCreditCard, \
-DataSplice, DataLandsat, \
-DataLetter, DataDigits, DataCIFAR]:
-    for class_model in \
-    [ModelRF, ModelNeuralNetwork, \
-    ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading]:
-        dtf_performance_tmp = data_model_run(
-            class_data=class_data,
-            class_model=class_model, 
-            percentage_test=20,
-            percentage_unlabeled=5, 
-            percentage_labeled=75, 
-            cv_folds=2, 
-            random_samples=2,
-            seed=1102
-        )
-        if dtf_performance is None:
-            dtf_performance = dtf_performance_tmp
-        else: 
-            dtf_performance = dtf_performance.append(dtf_performance_tmp)\
-            .reset_index(drop=True)
-        dtf_performance.to_csv(
-            path_or_buf="outputs/" + str_run_id + "-experiment-3.csv", 
             sep=";", 
             index=False,
             decimal="."
