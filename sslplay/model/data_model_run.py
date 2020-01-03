@@ -39,6 +39,7 @@ def data_model_run(
 
     obj_data = class_data()
     obj_data.load()
+    obj_data.parse()
 
     dtf_performance = pd.DataFrame(
         data=None, 
