@@ -19,7 +19,7 @@ scaler = StandardScaler()
 pca = PCA(n_components=2)
 np.random.seed(1102)
 
-X_r = pca.fit(X).transform(scaler.fit_transform(X))
+X_r = pca.fit(scaler.fit_transform(X)).transform(scaler.fit_transform(X))
 array_subset = np.random.choice(range(X_r.shape[0]), size=300, replace=False)
 X_r = X_r[array_subset, :]
 y_r = y[array_subset]
