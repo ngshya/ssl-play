@@ -75,7 +75,7 @@ for percentage_unlabeled in \
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for class_data in \
-[DataDigits, DataSpambase, DataCreditCard, \
+[DataSpambase, DataCreditCard, \
 DataSplice, DataLandsat, \
 DataLetter, DataCIFAR]:
     for class_model in \
