@@ -18,6 +18,9 @@ class TestSample(unittest.TestCase):
 import numpy as np
 from sslplay.utils.ssplit import ssplit
 from sslplay.utils.s3split import s3split
+import tensorflow as tf # to avoid core dumped error when importing from sklearn
+from sslplay.utils.iforest import iforest
+
 
 class TestUtils(unittest.TestCase):
 
@@ -84,6 +87,47 @@ class TestUtils(unittest.TestCase):
         self.assertTrue(sum(y1==y4) == len(y1))
         self.assertTrue((len(y2) != len(y5)) or (sum(y2==y5) < len(y2)))
 
+
+    def test_iforest(self):
+
+        X = np.array([
+            [1, 1], 
+            [1.1, 1], 
+            [1, 1.1], 
+            [1.1, 1.1],
+            [100, 100]
+        ])
+        array_out = iforest(X, num_estimators=10, random_state=1102)
+        self.assertTrue(not array_out[4])
+        self.assertTrue(array_out[0])
+        self.assertTrue(array_out[1])
+        self.assertTrue(array_out[2])
+        self.assertTrue(array_out[3])
+        X = np.array([
+            [1, 1], 
+            [1.1, 1], 
+            [1, 1.1], 
+            [1.1, 1.1],
+            [100, 100], 
+            [100.1, 100],
+            [100, 100.1],
+            [100.1, 100.1],
+            [50, 50]
+        ])
+        array_out = iforest(
+            X=X, 
+            num_estimators=100, 
+            random_state=1102, 
+            contamination=0.05
+        )
+        self.assertEqual(sum(array_out), 8)
+        self.assertTrue(not array_out[8])
+
+
+
+
+
+
 ###############################################################################
 
 from sslplay.data.spambase import DataSpambase
@@ -93,6 +137,7 @@ from sslplay.data.landsat import DataLandsat
 from sslplay.data.digits import DataDigits
 from sslplay.data.letter import DataLetter
 from sslplay.data.cifar import DataCIFAR
+
 
 class TestData(unittest.TestCase):
 
@@ -147,6 +192,7 @@ class TestData(unittest.TestCase):
 
 ###############################################################################
 
+
 import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 import tensorflow as tf 
@@ -162,6 +208,7 @@ from sslplay.model.neural_network import ModelNeuralNetwork
 from sslplay.model.kmeans_random_forest import ModelKMeansRF
 from sslplay.model.ladder_network import ModelLadderNetwork
 from sslplay.model.label_spreading import ModelLabelSpreading
+
 
 obj_data = DataCreditCard()
 obj_data.load()
