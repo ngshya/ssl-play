@@ -1,5 +1,6 @@
 from pandas import read_csv
 import numpy as np
+from sslplay.utils.iforest import iforest 
 
 class DataSplice:
 
@@ -19,5 +20,12 @@ class DataSplice:
 
     
     def parse(self):
-        pass
+        array_bool_inliers = iforest(
+            self.X, 
+            num_estimators=100, 
+            random_state=1102, 
+            contamination=0.05
+        )
+        self.X = self.X[array_bool_inliers, :]
+        self.y = self.y[array_bool_inliers]
 

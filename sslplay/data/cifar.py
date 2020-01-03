@@ -1,6 +1,7 @@
 from pandas import read_csv
 import numpy as np
 import pickle
+from sslplay.utils.iforest import iforest 
 
 class DataCIFAR:
 
@@ -17,5 +18,12 @@ class DataCIFAR:
 
     
     def parse(self):
-        pass
+        array_bool_inliers = iforest(
+            self.X, 
+            num_estimators=100, 
+            random_state=1102, 
+            contamination=0.05
+        )
+        self.X = self.X[array_bool_inliers, :]
+        self.y = self.y[array_bool_inliers]
     

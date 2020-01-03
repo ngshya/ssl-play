@@ -1,5 +1,6 @@
 from pandas import read_csv
 import numpy as np
+from sslplay.utils.iforest import iforest 
 
 class DataSpambase:
 
@@ -71,9 +72,16 @@ class DataSpambase:
             "target"
         ]
         self.y = np.array(self.X["target"])
-        self.X = self.X.loc[:, self.X.columns != "target"]
+        self.X = np.array(self.X.loc[:, self.X.columns != "target"])
 
 
     
     def parse(self):
-        pass
+        array_bool_inliers = iforest(
+            self.X, 
+            num_estimators=100, 
+            random_state=1102, 
+            contamination=0.05
+        )
+        self.X = self.X[array_bool_inliers, :]
+        self.y = self.y[array_bool_inliers]

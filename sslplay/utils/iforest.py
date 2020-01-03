@@ -9,7 +9,7 @@ def iforest(X, num_estimators=100, random_state=1102, contamination=0.05):
         n_estimators=num_estimators,
         n_jobs=int(np.max([multiprocessing.cpu_count()-2, 1])), 
         random_state=random_state, 
-        max_features=np.max([int(0.6 * X.shape[1]), 1]), 
+        max_features=np.max([int(0.3 * X.shape[1]), 1]), 
         contamination=contamination
 
     )
