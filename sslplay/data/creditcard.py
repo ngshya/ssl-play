@@ -1,5 +1,6 @@
 from pandas import read_csv
 import numpy as np
+from pandas import get_dummies
 from sslplay.utils.iforest import iforest 
 
 class DataCreditCard:
@@ -16,6 +17,16 @@ class DataCreditCard:
 
     
     def parse(self):
+        
+        # SEX
+        self.X[:, 1] = self.X[:, 1] - 1
+        # EDUCATION
+        self.X = np.hstack((self.X, get_dummies(self.X[:, 2])))
+        self.X = np.delete(self.X,[2], 1)
+        #MARRIAGE
+        self.X = np.hstack((self.X, get_dummies(self.X[:, 2])))
+        self.X = np.delete(self.X,[2], 1)
+
         array_bool_inliers = iforest(
             self.X, 
             num_estimators=100, 
