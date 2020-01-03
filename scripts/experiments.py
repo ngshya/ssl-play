@@ -38,7 +38,7 @@ from sslplay.model.label_spreading import ModelLabelSpreading
 
 
 # Experiment 1
-
+"""
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for percentage_unlabeled in \
@@ -67,7 +67,7 @@ for percentage_unlabeled in \
             index=False,
             decimal="."
         )
-
+"""
 
 
 # Experiment 2
