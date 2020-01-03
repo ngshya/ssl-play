@@ -8,7 +8,8 @@ class ModelRF:
     def __init__(self):
         np.random.seed(1102)
         self.model = RandomForestClassifier(
-            max_depth=5, 
+            n_estimators=25,
+            max_depth=4, 
             random_state=1102, 
             n_jobs=int(np.max([multiprocessing.cpu_count()-2, 1]))
         )

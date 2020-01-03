@@ -22,11 +22,8 @@ class ModelNeuralNetwork:
 
         self.model = keras.Sequential([
             keras.layers.Flatten(input_shape=(1, self.Xl.shape[2])),
-            keras.layers.Dense(1000, activation='relu'),
-            keras.layers.Dense(500, activation='relu'),
-            keras.layers.Dense(250, activation='relu'),
-            keras.layers.Dense(250, activation='relu'),
-            keras.layers.Dense(250, activation='relu'),
+            keras.layers.Dense(16, activation='relu'),
+            keras.layers.Dense(8, activation='relu'),
             keras.layers.Dense(len(np.unique(y)), activation='softmax')
         ])
 
