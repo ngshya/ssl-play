@@ -4,7 +4,7 @@ import numpy as np
 plt.style.use('seaborn-whitegrid')
 
 dtf_performance_2 = pd.read_csv(
-    "outputs/2019-12-28-12-14-experiment-2.csv", 
+    "outputs/2020-01-04-02-25-experiment-2.csv", 
     sep=";", 
     decimal="."
 )
@@ -34,7 +34,7 @@ x = np.arange(len(datasets)) / 2.2
 
 for str_perf in ["ACCURACY", "AUC_MACRO", "AUC_WEIGHTED", "F1_MACRO", "F1_WEIGHTED"]:
     plt.figure(figsize=(8,5))
-    for i, str_model in enumerate(["RF", "NN", "KRF", "LN", "LS"]):
+    for i, str_model in enumerate(["RF", "KRF", "NN", "LN", "LS"]):
         y = dtf_performance_2[str_perf][dtf_performance_2["MODEL"] == str_model]
         plt.bar(
             x+i/15, y, color = colors[i], 
