@@ -80,7 +80,7 @@ if __name__ == "__main__":
                     "--punla=" + str(punla) + " " + 
                     "--plabe=" + str(plabe) + " " + 
                     "--folds=" + str(5) + " " + 
-                    "--samples=" + str(30) + " " +
+                    "--samples=" + str(10) + " " +
                     "--outfolder=" + "outputs/batch_run_output/" + " " +
                     "--seed=" + "1102" + " " + 
                     str_background
