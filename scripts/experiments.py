@@ -102,7 +102,7 @@ for percentage_unlabeled in \
 
 
 # Experiment 2
-
+"""
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for class_data in \
@@ -133,3 +133,30 @@ DataLetter, DataCIFAR]:
             index=False,
             decimal="."
         )
+"""
+
+
+# Experiment 3
+"""
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+import numpy as np
+array_tms = []
+for class_model in \
+[ModelRF, ModelNeuralNetwork, \
+ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading]:
+    tms_start = time.time()
+    dtf_performance_tmp = data_model_run(
+        class_data=DataDigits,
+        class_model=class_model, 
+        percentage_test=20,
+        percentage_unlabeled=40, 
+        percentage_labeled=40,
+        cv_folds=2, 
+        random_samples=2,
+        seed=1102
+    )
+    array_tms.append(time.time() - tms_start)
+    print(array_tms)
+print(np.array(array_tms) / np.min(array_tms))
+"""
