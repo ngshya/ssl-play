@@ -4,7 +4,7 @@ import numpy as np
 plt.style.use('seaborn-whitegrid')
 
 dtf_performance_1 = pd.read_csv(
-    "outputs/2019-12-28-07-44-experiment-1.csv", 
+    "outputs/2020-01-03-23-54-experiment-1.csv", 
     sep=";", 
     decimal="."
 )
@@ -38,8 +38,8 @@ for str_metric in ["ACCURACY", "AUC_MACRO", "AUC_WEIGHTED", "F1_MACRO", "F1_WEIG
         plt.plot(x, y[dtf_performance_1.MODEL == m], label=m)
     plt.legend()
     plt.title("AVERAGE " + str_metric.replace("_", " "))
-    plt.xlim(xmin=40, xmax=80)
-    plt.ylim(ymin=np.min(y[dtf_performance_1.MODEL == "LS"]), ymax=1)
+    plt.xlim(xmin=40, xmax=75)
+    plt.ylim(ymin=np.min(y[dtf_performance_1.MODEL == "NN"])-0.01, ymax=1)
     plt.xlabel("PERCENTAGE OF UNLABELED DATA")
     plt.ylabel(str_metric.replace("_", " "))
     plt.show()
