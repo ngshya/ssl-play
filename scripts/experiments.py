@@ -69,9 +69,40 @@ for percentage_unlabeled in \
         )
 """
 
+# Experiment 1b
+
+dtf_performance = None
+str_run_id = time.strftime("%Y-%m-%d-%H-%M")
+for percentage_unlabeled in \
+[79, 79.5, 79.9]:
+    for class_model in \
+    [ModelRF, ModelKMeansRF, ModelLabelSpreading]:
+        dtf_performance_tmp = data_model_run(
+            class_data=DataDigits,
+            class_model=class_model, 
+            percentage_test=20,
+            percentage_unlabeled=percentage_unlabeled, 
+            percentage_labeled=80-percentage_unlabeled, 
+            cv_folds=2, 
+            random_samples=2,
+            seed=1102
+        )
+        if dtf_performance is None:
+            dtf_performance = dtf_performance_tmp
+        else: 
+            dtf_performance = dtf_performance.append(dtf_performance_tmp)\
+            .reset_index(drop=True)
+        dtf_performance.to_csv(
+            path_or_buf="outputs/" + str_run_id + "-experiment-1-b.csv", 
+            sep=";", 
+            index=False,
+            decimal="."
+        )
+
+
 
 # Experiment 2
-
+"""
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for class_data in \
@@ -102,3 +133,4 @@ DataLetter, DataCIFAR]:
             index=False,
             decimal="."
         )
+"""
