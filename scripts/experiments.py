@@ -70,7 +70,7 @@ for percentage_unlabeled in \
 """
 
 # Experiment 1b
-
+"""
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for percentage_unlabeled in \
@@ -98,11 +98,11 @@ for percentage_unlabeled in \
             index=False,
             decimal="."
         )
-
+"""
 
 
 # Experiment 2
-"""
+
 dtf_performance = None
 str_run_id = time.strftime("%Y-%m-%d-%H-%M")
 for class_data in \
@@ -116,8 +116,8 @@ DataLetter, DataCIFAR]:
             class_data=class_data,
             class_model=class_model, 
             percentage_test=20,
-            percentage_unlabeled=75, 
-            percentage_labeled=5,
+            percentage_unlabeled=79.9, 
+            percentage_labeled=0.01,
             cv_folds=2, 
             random_samples=2,
             seed=1102
@@ -133,4 +133,3 @@ DataLetter, DataCIFAR]:
             index=False,
             decimal="."
         )
-"""
