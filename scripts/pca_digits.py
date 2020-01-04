@@ -46,6 +46,7 @@ plt.ylabel("Dimension 2")
 plt.legend(fancybox=True, framealpha=1)
 plt.show()
 
+"""
 array_classes_show = [1,2,3,6,8,9]
 plt.figure()
 for color, i, target_name in zip(colors[array_classes_show], \
@@ -81,4 +82,4 @@ plt.xlabel("Dimension 5")
 plt.ylabel("Dimension 6")
 plt.legend(fancybox=True, framealpha=1)
 plt.show()
-
+"""
