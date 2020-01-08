@@ -39,7 +39,7 @@ from sslplay.model.label_spreading import ModelLabelSpreading
 
 dtf_performance_tmp = data_model_run(
     class_data=DataDigits,
-    class_model=ModelRF, 
+    class_model=ModelLabelSpreading, 
     percentage_test=20,
     percentage_unlabeled=40, 
     percentage_labeled=40, 
