@@ -14,7 +14,10 @@ class ModelNeuralNetwork:
 
     def fit(self, X, y, Xu=None):
 
+        #tf.reset_default_graph()
         tf.compat.v1.set_random_seed(1102)
+        np.random.seed(1102)
+        tf.set_random_seed(1102)
 
         self.Xl = self.scaler.fit_transform(X).reshape(X.shape[0], 1, -1)
 
@@ -38,5 +41,7 @@ class ModelNeuralNetwork:
 
     def predict(self, X):
         tf.compat.v1.set_random_seed(1102)
+        np.random.seed(1102)
+        tf.set_random_seed(1102)
         self.Xt = self.scaler.transform(X).reshape(X.shape[0], 1, -1)
         return self.model.predict(self.Xt)
