@@ -6,6 +6,7 @@ from keras.layers import *
 import tensorflow as tf
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from keras import backend as K
 
 
 class AddBeta(Layer):
@@ -82,8 +83,8 @@ def add_noise( inputs , noise_std ):
 
 
 def get_ladder_network_fc(layer_sizes=[784, 1000, 500, 250, 250, 250, 10], 
-     noise_std=0.3,
-     denoising_cost=[1000.0, 10.0, 0.10, 0.10, 0.10, 0.10, 0.10]):
+    noise_std=0.3,
+    denoising_cost=[1000.0, 10.0, 0.10, 0.10, 0.10, 0.10, 0.10]):
 
     L = len(layer_sizes) - 1  # number of layers
 
@@ -160,7 +161,11 @@ class ModelLadderNetwork:
 
     def fit(self, X, y, Xu=None):
 
+        K.clear_session()
+
         tf.compat.v1.set_random_seed(1102)
+        np.random.seed(1102)
+        tf.set_random_seed(1102) 
 
         if Xu.shape[0] == 0:
             Xu = X
@@ -190,5 +195,7 @@ class ModelLadderNetwork:
 
     def predict(self, X):
         tf.compat.v1.set_random_seed(1102)
+        np.random.seed(1102)
+        tf.set_random_seed(1102)
         self.Xt = self.scaler.transform(X)
         return self.model.test_model.predict(self.Xt , batch_size=10)
