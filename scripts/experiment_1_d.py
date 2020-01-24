@@ -98,8 +98,8 @@ for nfold in range(2):
 
                 for key_perf in dict_perf.keys():
                     dtf_performance_tmp = pd.DataFrame({
-                        "FOLD": [nfold],
-                        "SAMPLE": [nsample],
+                        "FOLD": [nfold+1],
+                        "SAMPLE": [nsample+1],
                         "PERC_UNLA": [p],
                         "MODEL": [obj_model.name],
                         "METRIC": [key_perf], 
