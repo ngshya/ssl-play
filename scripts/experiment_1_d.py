@@ -56,6 +56,9 @@ dict_perf={
     "F1_MACRO": f1, 
     "F1_WEIGHTED": f1W
 }
+array_class_model = [ModelRF, ModelNeuralNetwork, \
+ModelKMeansRF, ModelLadderNetwork]
+
 
 for nfold in range(2):
     seed_1 = np.random.randint(100)
@@ -66,14 +69,14 @@ for nfold in range(2):
             X=obj_data.X, 
             y=obj_data.y, 
             percentage_1=20, 
-            percentage_2=77, 
-            percentage_3=3,
+            percentage_2=79, 
+            percentage_3=1,
             seed_1=seed_1, 
             seed_2=seed_2
         )
 
-        for p in [10, 30, 50, 70, 77]:
-            q = p/77.0
+        for p in [5, 10, 15, 20, 25, 30, 35, 40]:
+            q = p/79.0
             tmp_len = len(yu)
             array_bool = np.random.choice(
                 a=[False, True], 
@@ -84,9 +87,8 @@ for nfold in range(2):
             Xutmp = Xu[array_bool, :]
             yutmp = yu[array_bool]
 
-            for class_model in \
-            [ModelRF, ModelNeuralNetwork, \
-            ModelKMeansRF, ModelLadderNetwork, ModelLabelSpreading]:
+            for class_model in array_class_model:
+                tf.reset_default_graph()
                 obj_model = class_model()
                 logging.info("FOLD " + str(nfold+1) + \
                 " | SAMPLE " + str(nsample+1) + \
