@@ -66,8 +66,8 @@ for nfold in range(2):
             X=obj_data.X, 
             y=obj_data.y, 
             percentage_1=20, 
-            percentage_2=3, 
-            percentage_3=77,
+            percentage_2=77, 
+            percentage_3=3,
             seed_1=seed_1, 
             seed_2=seed_2
         )
