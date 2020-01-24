@@ -27,6 +27,9 @@ obj_data = DataDigits()
 obj_data.load()
 obj_data.parse()
 
+
+
+
 Xt, yt, Xl, yl = ssplit(
     obj_data.X, obj_data.y, 
     20, 80,
