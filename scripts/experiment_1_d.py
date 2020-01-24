@@ -107,12 +107,12 @@ for nfold in range(2):
                             array_test_pred)]
                     })
                 
-                if dtf_performance is None:
-                    dtf_performance = dtf_performance = dtf_performance_tmp
-                else: 
-                    dtf_performance = dtf_performance\
-                    .append(dtf_performance_tmp, sort=False)\
-                    .reset_index(drop=True)
+                    if dtf_performance is None:
+                        dtf_performance = dtf_performance = dtf_performance_tmp
+                    else: 
+                        dtf_performance = dtf_performance\
+                        .append(dtf_performance_tmp, sort=False)\
+                        .reset_index(drop=True)
 
 
 
